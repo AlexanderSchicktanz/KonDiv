@@ -17,7 +17,8 @@ typedef enum {
     MENU,
     INFO,
     TEST,
-    QUELLEN
+    QUELLEN,
+    LÖUNG
 } Screen;
 
 void setSize(int w, int h) {
@@ -96,8 +97,12 @@ int main(void) {
             case TEST:
                 DrawText("Aufgaben", 100, 100, 40, WHITE);
                 DrawRectangleRec((Rectangle){50, 500, 100, 40}, GRAY);
+                DrawRectangleRec((Rectangle){300, 500, 100, 40}, GRAY);
                 if (CheckCollisionPointRec(mousePos, (Rectangle){50, 500, 100, 40}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
+                }
+                if (CheckCollisionPointRec(mousePos, (Rectangle){300, 500, 100, 40}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    currentScreen = LÖUNG;
                 }
                 break;
             
@@ -112,6 +117,13 @@ int main(void) {
 "https://de.wikipedia.org/wiki/Divergenz_(Biologie)\n"
 "https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n", (Vector2){100, 400}, 40, 10, WHITE);
                 break;
+            case LÖUNG:
+                DrawText("Lösungen", 100, 100, 40, WHITE);
+                DrawRectangleRec((Rectangle){50, 500, 100, 40}, GRAY);
+                if (CheckCollisionPointRec(mousePos, (Rectangle){50, 500, 100, 40}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    currentScreen = TEST;
+                }
+                DrawTextEx(def, "1. Analogie ist das Ergebnis von Konvergenz\n", (Vector2){100, 400}, 40, 10, WHITE);
         }
         EndDrawing();
     }
