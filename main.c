@@ -208,13 +208,14 @@ void DrawWrappedText(Font font, const char *text, Vector2 position, float fontSi
 }
 
 int main(void) {
+    /*
     Image info = LoadImage("./resources/info.png");
     if(!info.data) {
         printf("Texture not loaded!\n");
         return 1;
     }
     Texture2D infoTex = LoadTextureFromImage(info);
-    /*
+    
     Texture2D task = LoadTexture("./resources/task.png");
     Texture2D quellen = LoadTexture("./resources/quellen.png");
     Texture2D loesung = LoadTexture("./resources/loesung.png");*/
@@ -244,16 +245,18 @@ int main(void) {
 
         switch (currentScreen) {
             case MENU:
-                DrawTextEx(def, "Von Tintenfischen und Vögeln:", (Vector2){400, 100}, 160, 40, WHITE);
-                DrawTextEx(def, "Konvergenz und Divergenz in der Evolution", (Vector2){400, 250}, 160, 40, WHITE);
+                DrawTextBoxed(def, "Von Tintenfischen und Vögeln:\nKonvergenz und Divergenz in der Evolution", (Rectangle){ 100,100,width*4/5,height*3/4 }, width/25, width/250, true, WHITE);
                 
                 DrawRectangle(infoButton.x, infoButton.y, infoButton.width, infoButton.height, BLUE);
                 //DrawTexture(infoTex,infoButton.x,infoButton.y,WHITE);
                 DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
                 DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
-                DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 160, 40, WHITE);
-                DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 160, 40, WHITE);
-                DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 160, 40, WHITE);
+                //DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 200, 40, WHITE);
+                //DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 200, 40, WHITE);
+                //DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 200, 40, WHITE);
+                DrawTextBoxed(def, "Informationen", (Rectangle){ infoButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
+                DrawTextBoxed(def, "Aufgaben", (Rectangle){ taskButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
+                DrawTextBoxed(def, "Quellen", (Rectangle){ quellenButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
                 
                 if (CheckCollisionPointRec(mousePos, infoButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = INFO;
@@ -267,7 +270,7 @@ int main(void) {
                 break;
 
             case INFO:
-                DrawText("Informationen", 100, 100, 40, WHITE);
+                DrawTextEx(def,"Informationen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
@@ -296,9 +299,8 @@ int main(void) {
             break;
             
             case TEST:
-                DrawText("Aufgaben", 100, 100, 40, WHITE);
+                DrawTextEx(def,"Aufgaben", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
-                DrawRectangleRec((Rectangle){300, 500, 100, 40}, GRAY);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
@@ -308,18 +310,27 @@ int main(void) {
                 break;
             
             case QUELLEN:
-                DrawText("Quellen", 100, 100, 40, WHITE);
+                DrawTextEx(def,"Quellen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
+                char **quellen = (char*[]){"https://studyflix.de/biologie/konvergenz-6333",
+"https://simpleclub.com/lessons/biologie-divergenz",
+"https://de.wikipedia.org/wiki/Divergenz_(Biologie)",
+"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)"};
                 DrawTextEx(def, "https://studyflix.de/biologie/konvergenz-6333\n"
 "https://simpleclub.com/lessons/biologie-divergenz\n"
 "https://de.wikipedia.org/wiki/Divergenz_(Biologie)\n"
-"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n", (Vector2){100, 400}, 40, 10, WHITE);
+"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n", (Vector2){100, 400}, 80, 10, WHITE);
+                for(int i = 0; i < 4; i++){
+                    if(CheckCollisionPointRec(mousePos, (Rectangle){100, 400 + i*80, 1000, 100}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+                        OpenURL(quellen[i]);
+                    }
+                }
                 break;
             case LÖUNG:
-                DrawText("Lösungen", 100, 100, 40, WHITE);
+                DrawTextEx(def,"Lösungen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = TEST;
