@@ -228,6 +228,15 @@ int main(void) {
     InitWindow(width, height, "KonDiv");
     SetWindowState(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     SetTargetFPS(60);
+    Image info = LoadImage("./resources/info.png");
+    Texture2D infoTex = LoadTextureFromImage(info);//this breaks the website
+    UnloadImage(info);
+    Image test = LoadImage("./resources/test.png");
+    Texture2D testTex = LoadTextureFromImage(test);
+    UnloadImage(test);
+    Image quellen = LoadImage("./resources/quellen.png");
+    Texture2D quellenTex = LoadTextureFromImage(quellen);
+    UnloadImage(quellen);
 
     Font def = LoadFontEx("./resources/ViaodaLibre-Regular.ttf", 256, NULL, 255);
     GuiSetFont(def);
@@ -247,12 +256,22 @@ int main(void) {
 
         switch (currentScreen) {
             case MENU:
+                //DrawTexture(infoTex,0,0,WHITE);
                 DrawTextBoxed(def, "Von Tintenfischen und Vögeln:\nKonvergenz und Divergenz in der Evolution", (Rectangle){ 100,100,width*4/5,height*3/4 }, width/25, width/250, true, WHITE);
                 
-                DrawRectangle(infoButton.x, infoButton.y, infoButton.width, infoButton.height, BLUE);
+                //DrawRectangle(infoButton.x, infoButton.y, infoButton.width, infoButton.height, BLUE);
+                Rectangle source = { 0, 0, infoTex.width, infoTex.height };  // Full texture
+                Vector2 origin = { 0, 0 };  // Top-left corner as rotation origin
+                float rotation = 0.0f;  // No rotation
+
+                DrawTexturePro(infoTex, source, infoButton, origin, rotation, WHITE);
+                source = (Rectangle){ 0, 0, testTex.width, testTex.height };
+                DrawTexturePro(testTex, source, taskButton, origin, rotation, WHITE);
+                source = (Rectangle){ 0, 0, quellenTex.width, quellenTex.height };
+                DrawTexturePro(quellenTex, source, quellenButton, origin, rotation, WHITE);
                 //DrawTexture(infoTex,infoButton.x,infoButton.y,WHITE);
-                DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
-                DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
+                //DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
+                //DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
                 //DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 200, 40, WHITE);
                 //DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 200, 40, WHITE);
                 //DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 200, 40, WHITE);
@@ -325,12 +344,18 @@ int main(void) {
                 char **quellen = (char*[]){"https://studyflix.de/biologie/konvergenz-6333",
 "https://simpleclub.com/lessons/biologie-divergenz",
 "https://de.wikipedia.org/wiki/Divergenz_(Biologie)",
-"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)"};
+"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)",
+"https://icon-library.com/images/info-icon/info-icon-22.jpg",
+"https://static.vecteezy.com/system/resources/previews/019/004/690/original/source-of-river-color-icon-illustration-vector.jpg",
+"https://static.vecteezy.com/system/resources/previews/014/988/380/original/paper-test-icon-outline-exam-answer-vector.jpg"};
                 DrawTextEx(def, "https://studyflix.de/biologie/konvergenz-6333\n"
 "https://simpleclub.com/lessons/biologie-divergenz\n"
 "https://de.wikipedia.org/wiki/Divergenz_(Biologie)\n"
-"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n", (Vector2){100, 400}, 80, 10, WHITE);
-                for(int i = 0; i < 4; i++){
+"https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n"
+"https://icon-library.com/images/info-icon/info-icon-22.jpg\n"
+"https://static.vecteezy.com/system/resources/previews/019/004/690/original/source-of-river-color-icon-illustration-vector.jpg\n"
+"https://static.vecteezy.com/system/resources/previews/014/988/380/original/paper-test-icon-outline-exam-answer-vector.jpg\n", (Vector2){100, 400}, 80, 10, WHITE);
+                for(int i = 0; i < 7; i++){
                     if(CheckCollisionPointRec(mousePos, (Rectangle){100, 400 + i*width/80, 1000, 100}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
                         OpenURL(quellen[i]);
                     }
