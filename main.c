@@ -208,23 +208,17 @@ void DrawWrappedText(Font font, const char *text, Vector2 position, float fontSi
 }
 
 int main(void) {
-    if(width<height) printf("Mobile.\n");
-    /*
-    Image info = LoadImage("./resources/info.png");
-    if(!info.data) {
-        printf("Texture not loaded!\n");
-        return 1;
-    }
-    Texture2D infoTex = LoadTextureFromImage(info);
-    
-    Texture2D task = LoadTexture("./resources/task.png");
-    Texture2D quellen = LoadTexture("./resources/quellen.png");
-    Texture2D loesung = LoadTexture("./resources/loesung.png");*/
     Rectangle infoButton = (Rectangle){width/4-width/12, height/2, width/6, width/6};
     Rectangle taskButton = (Rectangle){width/2-width/12, height/2, width/6, width/6};
     Rectangle quellenButton = (Rectangle){width*3/4-width/12, height/2, width/6, width/6};
     Rectangle back = (Rectangle){50,height*4/5,width/5,height/20};
     Rectangle forward = (Rectangle){100+width/5,height*4/5,width/5,height/20};
+    if(width<height){
+        printf("Mobile.\n");
+        infoButton = (Rectangle){width/2-width/12, height/4+height/8, width/6, width/6};
+        taskButton = (Rectangle){width/2-width/12, height/2+height/8, width/6, width/6};
+        quellenButton = (Rectangle){width/2-width/12, height*3/4+height/8, width/6, width/6};
+    }
     InitWindow(width, height, "KonDiv");
     SetWindowState(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     SetTargetFPS(60);
@@ -257,9 +251,16 @@ int main(void) {
         switch (currentScreen) {
             case MENU:
                 //DrawTexture(infoTex,0,0,WHITE);
-                DrawTextBoxed(def, "Von Tintenfischen und Vögeln:\nKonvergenz und Divergenz in der Evolution", (Rectangle){ 100,100,width*4/5,height*3/4 }, width/25, width/250, true, WHITE);
+                DrawTextBoxed(def, "Von Tintenfischen und Vögeln:\nKonvergenz und Divergenz in der Evolution", (Rectangle){ width/2-MeasureTextEx(def, "Konvergenz und Divergenz in der Evolution", width/25, width/250).x/2,100,width*4/5,height*3/4 }, width/25, width/250, true, WHITE);
                 
+                //DrawTexture(infoTex,infoButton.x,infoButton.y,WHITE);
+                //DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
+                //DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
+                //DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 200, 40, WHITE);
+                //DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 200, 40, WHITE);
+                //DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 200, 40, WHITE);
                 //DrawRectangle(infoButton.x, infoButton.y, infoButton.width, infoButton.height, BLUE);
+
                 Rectangle source = { 0, 0, infoTex.width, infoTex.height };  // Full texture
                 Vector2 origin = { 0, 0 };  // Top-left corner as rotation origin
                 float rotation = 0.0f;  // No rotation
@@ -269,12 +270,6 @@ int main(void) {
                 DrawTexturePro(testTex, source, taskButton, origin, rotation, WHITE);
                 source = (Rectangle){ 0, 0, quellenTex.width, quellenTex.height };
                 DrawTexturePro(quellenTex, source, quellenButton, origin, rotation, WHITE);
-                //DrawTexture(infoTex,infoButton.x,infoButton.y,WHITE);
-                //DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
-                //DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
-                //DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 200, 40, WHITE);
-                //DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 200, 40, WHITE);
-                //DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 200, 40, WHITE);
                 DrawTextBoxed(def, "Informationen", (Rectangle){ infoButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
                 DrawTextBoxed(def, "Aufgaben", (Rectangle){ taskButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
                 DrawTextBoxed(def, "Quellen", (Rectangle){ quellenButton.x,infoButton.y-width/50,width*4/5,height*3/4 }, width/50, width/500, true, WHITE);
@@ -322,9 +317,9 @@ int main(void) {
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
-                char* aufgaben = "1. Aufgabe:\nDefinieren sie die Begriffe „Konvergente und Divergente Evolution“ und erläutern Sie anhand eines Beispieles, wie analoge Organe entstehen.\n\n"
+                char* aufgaben = "1. Aufgabe:\nDefinieren sie die Begriffe ''Konvergente und Divergente Evolution'' und erläutern Sie anhand eines Beispieles, wie analoge Organe entstehen.\n\n"
                 "2. Aufgabe\nVergleichen Sie die Entstehung analoger und homologer Organe und erklären sie deren Entstehung.\n\n"
-                "3. Aufgabe\nDiskutieren sie die Aussage: „Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.“  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
+                "3. Aufgabe\nDiskutieren sie die Aussage: ''Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.''  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
                 "";
                 DrawRectangleRec(forward, GRAY);
                 DrawTextEx(def, "EWH", (Vector2){forward.x, forward.y}, width/40, 10, WHITE);
