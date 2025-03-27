@@ -291,7 +291,7 @@ int main(void) {
                 //DrawWrappedText(def, kon, (Vector2){100, 400}, 80, 10, 1000, WHITE);
                 //DrawTextEx(def, kon, (Vector2){100, 400}, 80, 10, WHITE);
                 //DrawTextRec(def, kon, (Rectangle){100, 400, 1000, 1000}, 80, 10, true, WHITE);
-                DrawTextBoxed(def, kon, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
+                DrawTextBoxed(def, kon, (Rectangle){ 100,400,width*4/5,height*3/4 }, width/80, 2.0f, true, WHITE);
             break;
             
             case TEST:
@@ -305,7 +305,7 @@ int main(void) {
                 "3. Aufgabe\nDiskutieren sie die Aussage: „Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.“  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
                 "";
                 DrawRectangleRec(forward, GRAY);
-                DrawTextBoxed(def, aufgaben, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
+                DrawTextBoxed(def, aufgaben, (Rectangle){ 100,400,width*4/5,height*3/4 }, width/80, 2.0f, true, WHITE);
                 if (CheckCollisionPointRec(mousePos, forward) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = LOESUNG;
                 }
@@ -326,7 +326,7 @@ int main(void) {
 "https://de.wikipedia.org/wiki/Divergenz_(Biologie)\n"
 "https://www.biologie-seite.de/Biologie/Konvergenz_(Biologie)\n", (Vector2){100, 400}, 80, 10, WHITE);
                 for(int i = 0; i < 4; i++){
-                    if(CheckCollisionPointRec(mousePos, (Rectangle){100, 400 + i*80, 1000, 100}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+                    if(CheckCollisionPointRec(mousePos, (Rectangle){100, 400 + i*width/80, 1000, 100}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
                         OpenURL(quellen[i]);
                     }
                 }
@@ -362,7 +362,7 @@ int main(void) {
 ""
 "Diskutieren:\n"
 "Analoge Merkmale sind eine Reaktion auf Umweltbedingen und nicht auf Abstammung und Homologe Merkmale basieren auf einer gemeinsamen Herkunft haben aber unterschiedliche Funktionen. Deswegen kann man nicht von homologen oder analogen Merkmalen auf die Verwandtschaft schließen.\n";
-                DrawTextBoxed(def, los, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
+                DrawTextBoxed(def, los, (Rectangle){ 100,400,width*4/5,height*3/4 }, width/80, 2.0f, true, WHITE);
                 break;
         }
         EndDrawing();
