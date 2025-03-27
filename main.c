@@ -223,6 +223,7 @@ int main(void) {
     Rectangle taskButton = (Rectangle){width/2-width/12, height/2, width/6, width/6};
     Rectangle quellenButton = (Rectangle){width*3/4-width/12, height/2, width/6, width/6};
     Rectangle back = (Rectangle){50,height*4/5,width/5,height/20};
+    Rectangle forward = (Rectangle){100+width/5,height*4/5,width/5,height/20};
     InitWindow(width, height, "KonDiv");
     SetWindowState(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     SetTargetFPS(60);
@@ -276,22 +277,17 @@ int main(void) {
                     currentScreen = MENU;
                 }
                 //DrawWrappedText(Font font, const char *text, Vector2 position, float fontSize, float spacing, float wrapWidth, Color color)
-                char* kon = "Konvergente Evolution (Analogie)\n"
-"Definition: das Entstehen ähnlicher Merkmale bei nicht miteinander verwandten Arten, Entwicklung von analogen Merkmalen bei nicht näher verwandten Arten\n"
-"Ursache: im Laufe der Evolution durch Anpassung an eine ähnliche funktionale Anforderung und ähnliche Umweltbedingungen (ähnliche ökologische Nischen) ausgebildet, Wechselspiel von ähnlichem Selektionsdruck und Entwicklungskorridoren*1, gleiche Selektionsfaktoren, die zu vergleichbaren Anpassungen geführt haben\n"
-"Folge:\n"
-"Beispiele: Fische und Wale (Flossen), Vögel und Insekten (Flügel), Dornen und Stacheln*2, Tintenfische und Vögel (Schnabel)\n"
-"ähnliche Merkmale lassen sich direkt auf ihre Funktion zurückführen und liefern nicht unbedingt einen Rückschluss auf nahe Verwandtschaft zwischen zwei Arten\n"
-"Analoge Organe ähneln sich nicht nur in der Funktion, sondern teilweise auch äußerlich, teilweise sogar (oberflächlich) anatomisch, ABER: unabhängig voneinander entstanden\n"
-"Analogie ist das Ergebnis von Konvergenz\n"
-"*1 Bandbreite an möglichen Phänotypen, die ein bestimmter Genotyp unter verschiedenen Umweltbedingungen annehmen kann.\n"
-"*2 In der Botanik gibt es ebenfalls analoge Bildungen der Pflanzen. So werden von Laien Stacheln oft mit Dornen verwechselt. Im Gegensatz zu den Dornen werden Stacheln aber nur aus den oberen Zellschichten (Epidermis, Rindengewebe) gebildet. Sie sind also nur Oberflächenstrukturen (Emergenzen). Dornen sind hingegen Umbildungen der Blätter oder der Sprossachse.\n"
-"\nDivergente Evolution\n"
-"Definition: das Entstehen unterschiedlicher Merkmale bei eng verwandten Arten, Form der Artbildung\n"
-"Ursache: Starke inner- und außerartliche Konkurrenz, verschiedene Evolutionsfaktoren\n"
-"Folge: Divergenz führt zur Besetzung und Bildung neuer ökologischer Nischen und damit zur adaptiven Radiation. Im Endeffekt entstehen so neue Arten (Speziation), Individuen werden an ihre neuen, sich voneinander unterscheidenden Lebensbedingungen individuell angepasst\n"
-"Beispiele: Darwinfinken, Knochenbau bei Säugetieren\n"
-"Trotz der divergenten Entwicklungen bleiben Merkmale aufgrund der gemeinsamen Abstammung vergleichbar. Diese grundsätzliche Übereinstimmung wird als Homologie bezeichnet\n";
+                char* kon = "Konvergente Evolution und Analogie\n"
+""
+"Unter konvergenter Evolution versteht man das Entstehen ähnlicher bzw. analoger Merkmale bei nicht näher verwandten Arten. Im Laufe der Evolution geschah dies durch die Anpassung an eine ähnliche funktionale Anforderung und ähnliche Umweltbedingungen (ähnliche ökologische Nischen). Der Grund für konvergente Entwicklungen besteht also in einem Wechselspiel von ähnlichem Selektionsdruck und Entwicklungskorridoren*, sowie gleichen Selektionsfaktoren, die zu vergleichbaren Anpassungen geführt haben.\n"
+"Analoge Organe ähneln sich nicht nur in der Funktion, sondern manchmal auch äußerlich, teilweise sogar (oberflächlich) anatomisch. Allerdings sind sie unabhängig voneinander entstanden.\n"
+"Das Prinzip der Konvergenz lässt sich zum Beispiel bei den Schnäbeln von Vögeln und Tintenfischen beobachten. Obwohl Tintenfische im Wasser leben, bildeten sie ähnliche Strukturen wie Vögel aus, deren Lebensraum sich an Land und in der Luft befindet. Dabei sind die Arten gar nicht miteinander verwandt. Auch in der Pflanzenwelt lassen sich konvergente Vorgänge beobachten: So werden von Laien Stacheln oft mit Dornen verwechselt. Im Gegensatz zu den Dornen werden Stacheln aber nur aus den oberen Zellschichten gebildet. Sie sind also nur Oberflächenstrukturen. Dornen sind hingegen Umbildungen der Blätter oder der Sprossachse.\n"
+"Aus der konvergenten Evolution lässt sich ableiten, dass sich ähnliche Merkmale direkt auf ihre Funktion zurückführen lassen, aber nicht unbedingt einen Rückschluss auf nahe Verwandtschaft zwischen zwei Arten liefern.\n"
+"* Die Bandbreite an möglichen Phänotypen, die ein bestimmter Genotyp unter verschiedenen Umweltbedingungen annehmen kann.\n"
+                "\nDivergente Evolution und Homologie\n"
+"Divergente Evolution beschreibt das Entstehen unterschiedlicher Merkmale bei eng verwandten Arten, ist also eine Form der Artbildung. Als Ursache dafür gilt die starke inner- und außerartliche Konkurrenz einer Art, sowie unterschiedliche Evolutionsfaktoren. Trotz divergenter Entwicklungen bleiben Merkmale aber aufgrund der gemeinsamen Abstammung vergleichbar. Diese grundsätzliche Übereinstimmung wird dann als Homologie bezeichnet.\n"
+"Beobachtbar ist dieser Vorgang beispielsweise beim Knochenbau von Säugetieren. Obwohl die vorderen Extremitäten z.B. bei Fledermäusen Flügel und beim Menschen Hände ausbildeten, blieben sie von der Grundstruktur und dem Aufbau gleich.\n"
+"Divergenz führt zur Besetzung und Bildung neuer ökologischer Nischen und damit zur adaptiven Radiation. Im Endeffekt entstehen so neue Arten (Speziation) und Individuen werden an ihre neuen, sich voneinander unterscheidenden Lebensbedingungen individuell angepasst.\n";
                 //DrawWrappedText(def, kon, (Vector2){100, 400}, 80, 10, 1000, WHITE);
                 //DrawTextEx(def, kon, (Vector2){100, 400}, 80, 10, WHITE);
                 //DrawTextRec(def, kon, (Rectangle){100, 400, 1000, 1000}, 80, 10, true, WHITE);
@@ -304,6 +300,11 @@ int main(void) {
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
+                char* aufgaben = "1. Aufgabe:\nDefinieren sie die Begriffe „Konvergente und Divergente Evolution“ und erläutern Sie anhand eines Beispieles, wie analoge Organe entstehen.\n\n"
+                "2. Aufgabe\nVergleichen Sie die Entstehung analoger und homologer Organe und erklären sie deren Entstehung.\n\n"
+                "3. Aufgabe\nDiskutieren sie die Aussage: „Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.“  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
+                "";
+                DrawTextBoxed(def, aufgaben, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
                 if (CheckCollisionPointRec(mousePos, (Rectangle){300, 500, 100, 40}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = LÖUNG;
                 }
