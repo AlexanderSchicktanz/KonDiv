@@ -27,6 +27,13 @@ void setSize(int w, int h) {
 }
 
 int main(void) {
+    Texture2D info = LoadTexture("./resources/info.png");
+    Texture2D task = LoadTexture("./resources/task.png");
+    Texture2D quellen = LoadTexture("./resources/quellen.png");
+    Texture2D loesung = LoadTexture("./resources/loesung.png");
+    Rectangle infoButton = (Rectangle){width/4-width/12, height/2, width/6, width/6};
+    Rectangle taskButton = (Rectangle){width/2-width/12, height/2, width/6, width/6};
+    Rectangle quellenButton = (Rectangle){width*3/4-width/12, height/2, width/6, width/6};
     InitWindow(width, height, "KonDiv");
     SetWindowState(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_MAXIMIZED);
     SetTargetFPS(60);
@@ -52,20 +59,20 @@ int main(void) {
                 DrawTextEx(def, "Von Tintenfischen und Vögeln:", (Vector2){400, 100}, 160, 40, WHITE);
                 DrawTextEx(def, "Konvergenz und Divergenz in der Evolution", (Vector2){400, 250}, 160, 40, WHITE);
                 
-                DrawRectangle(width / 2 + infoStartX, startY, endX, endY, BLUE);
-                DrawRectangle(width / 2 + taskStartX, startY, endX, endY, RED);
-                DrawRectangle(width / 2 + quellenStartX, startY, endX, endY, LIGHTBLUE);
-                DrawText("Informationen", width / 2 + infoStartX, startY - 20, 20, WHITE);
-                DrawText("Aufgaben", width / 2 + taskStartX, startY - 20, 20, WHITE);
-                DrawText("Quellen", width / 2 + quellenStartX, startY - 20, 20, WHITE);
+                DrawRectangle(infoButton.x, infoButton.y, infoButton.width, infoButton.height, BLUE);
+                DrawRectangle(taskButton.x, taskButton.y, taskButton.width, taskButton.height, RED);
+                DrawRectangle(quellenButton.x, quellenButton.y, quellenButton.width, quellenButton.height, LIGHTBLUE);
+                DrawTextEx(def, "Informationen", (Vector2){infoButton.x,infoButton.y-200}, 160, 40, WHITE);
+                DrawTextEx(def, "Aufgaben", (Vector2){taskButton.x,infoButton.y-200}, 160, 40, WHITE);
+                DrawTextEx(def, "Quellen", (Vector2){quellenButton.x,infoButton.y-200}, 160, 40, WHITE);
                 
-                if (CheckCollisionPointRec(mousePos, (Rectangle){width / 2 + infoStartX, startY, endX, endY}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                if (CheckCollisionPointRec(mousePos, infoButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = INFO;
                 }
-                else if (CheckCollisionPointRec(mousePos, (Rectangle){width / 2 + taskStartX, startY, endX, endY}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                else if (CheckCollisionPointRec(mousePos, taskButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = TEST;
                 }
-                else if (CheckCollisionPointRec(mousePos, (Rectangle){width / 2 + quellenStartX, startY, endX, endY}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                else if (CheckCollisionPointRec(mousePos, quellenButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = QUELLEN;
                 }
                 break;
