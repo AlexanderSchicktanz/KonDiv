@@ -208,6 +208,7 @@ void DrawWrappedText(Font font, const char *text, Vector2 position, float fontSi
 }
 
 int main(void) {
+    if(width<height) printf("Mobile.\n");
     /*
     Image info = LoadImage("./resources/info.png");
     if(!info.data) {
@@ -273,6 +274,7 @@ int main(void) {
             case INFO:
                 DrawTextEx(def,"Informationen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
+                DrawTextEx(def, "Zurück", (Vector2){back.x, back.y}, width/40, 10, WHITE);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
@@ -297,6 +299,7 @@ int main(void) {
             case TEST:
                 DrawTextEx(def,"Aufgaben", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
+                DrawTextEx(def, "Zurück", (Vector2){back.x, back.y}, width/40, 10, WHITE);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
@@ -305,6 +308,7 @@ int main(void) {
                 "3. Aufgabe\nDiskutieren sie die Aussage: „Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.“  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
                 "";
                 DrawRectangleRec(forward, GRAY);
+                DrawTextEx(def, "EWH", (Vector2){forward.x, forward.y}, width/40, 10, WHITE);
                 DrawTextBoxed(def, aufgaben, (Rectangle){ 100,400,width*4/5,height*3/4 }, width/80, 2.0f, true, WHITE);
                 if (CheckCollisionPointRec(mousePos, forward) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = LOESUNG;
@@ -314,6 +318,7 @@ int main(void) {
             case QUELLEN:
                 DrawTextEx(def,"Quellen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
+                DrawTextEx(def, "Zurück", (Vector2){back.x, back.y}, width/40, 10, WHITE);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = MENU;
                 }
@@ -334,6 +339,7 @@ int main(void) {
             case LOESUNG:
                 DrawTextEx(def,"Lösungen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
+                DrawTextEx(def, "Zurück", (Vector2){back.x, back.y}, width/40, 10, WHITE);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = TEST;
                 }
