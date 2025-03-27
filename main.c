@@ -21,7 +21,7 @@ typedef enum {
     INFO,
     TEST,
     QUELLEN,
-    LÖUNG
+    LOESUNG
 } Screen;
 
 void setSize(int w, int h) {
@@ -304,9 +304,10 @@ int main(void) {
                 "2. Aufgabe\nVergleichen Sie die Entstehung analoger und homologer Organe und erklären sie deren Entstehung.\n\n"
                 "3. Aufgabe\nDiskutieren sie die Aussage: „Analoge Merkmale liefern keine Rückschlüsse auf die Verwandtschaft zwischen Arten, während homologe Merkmale dafür entscheidend sind.“  Beziehen Sie dabei die Begriffe Analogie, Homologie, konvergente und divergente Evolution ein. "
                 "";
+                DrawRectangleRec(forward, GRAY);
                 DrawTextBoxed(def, aufgaben, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
-                if (CheckCollisionPointRec(mousePos, (Rectangle){300, 500, 100, 40}) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                    currentScreen = LÖUNG;
+                if (CheckCollisionPointRec(mousePos, forward) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    currentScreen = LOESUNG;
                 }
                 break;
             
@@ -330,13 +331,39 @@ int main(void) {
                     }
                 }
                 break;
-            case LÖUNG:
+            case LOESUNG:
                 DrawTextEx(def,"Lösungen", (Vector2){100, 100}, 200, 40, WHITE);
                 DrawRectangleRec(back, GRAY);
                 if (CheckCollisionPointRec(mousePos, back) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     currentScreen = TEST;
                 }
-                DrawTextEx(def, "1. Analogie ist das Ergebnis von Konvergenz\n", (Vector2){100, 400}, 40, 10, WHITE);
+                //DrawTextEx(def, "1. Analogie ist das Ergebnis von Konvergenz\n", (Vector2){100, 400}, 40, 10, WHITE);
+                char *los = "Definition Konvergenz:\n"
+"Entstehung ähnlicher Merkmale bei nicht miteinander verwandten Arten aufgrund ähnlicher Umweltbedingungen und Selektionsfaktoren.\n"
+""
+"Definition Divergenz: \n"
+"Entstehung unterschiedlicher Merkmale bei eng miteinander verwandten Arten durch starke inner- und außerartlicher Konkurrenz und verschiedene Selektionsfaktoren.\n"
+""
+"Entstehung analoge Organe:\n"
+"Analoge Organe entstehen wenn auf zwei nicht verwandte Arten ähnliche Selektionsfaktoren wirken. Dies ist der Fall zum Beispiel bei den Flossen von Fischen und Walen, welche durch eine Anpassung an eine aquatische Lebensweise entstanden sind.\n\n"
+"Analoge Organe: \n"
+"Entstehen durch Konvergente Evolution und haben eine ähnliche oder gleiche Funktion und Erscheinungsbild. Dabei haben sie keine gemeinsame Abstammung.\n"
+""
+"Homologe Organe:\n"
+"Entstehen durch divergente Evolution und haben verschiedene Funktionen und Erscheinungsbilder.\n"
+"Dabei haben sie eine gemeinsame Abstammung. \n"
+""
+"Erklärung:\n"
+"Analoge Organe entwickeln sich durch konvergente Evolution und homologe Organe durch divergente Evolution. Diese unterschiedlichen Evolutionen treten auf, da auf die Arten unterschiedliche Selektionsfaktoren wirken. Die Arten passen sich unterschiedlich an diese Selektionsfaktoren an und entwickeln sich so entweder auseinander oder zusammen. \n\n"
+"Mögliche Argumente:\n"
+"Analoge Merkmale entstehen durch konvergenter Evolution und zeigen somit nur auf ihre Funktion und damit den Selektionsdruck, welcher auf die Art wirkt. \n"
+"Homologe Merkmale entstehen durch divergente Evolution und haben damit unterschiedliche Funktionen und Aussehen. Damit lässt sich auch nicht auf eine Gemeinsame Abstammung schließen.\n"
+""
+""
+"Diskutieren:\n"
+"Analoge Merkmale sind eine Reaktion auf Umweltbedingen und nicht auf Abstammung und Homologe Merkmale basieren auf einer gemeinsamen Herkunft haben aber unterschiedliche Funktionen. Deswegen kann man nicht von homologen oder analogen Merkmalen auf die Verwandtschaft schließen.\n";
+                DrawTextBoxed(def, los, (Rectangle){ 100,400,width*4/5,height*3/4 }, 80.0f, 2.0f, true, WHITE);
+                break;
         }
         EndDrawing();
     }
